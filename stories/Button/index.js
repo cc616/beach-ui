@@ -8,7 +8,7 @@ const stylesParams = {
   },
   default: {
     iconColor: 'rgba(0, 0, 0, 0.85)',
-    disabledIconColor: '',
+    disabledIconColor: 'rgba(0, 0, 0, 0.25)',
   }
 }
 
@@ -20,6 +20,7 @@ class Button extends HTMLElement {
     this.$root = this.attachShadow({ mode: 'open' });
     this.$root.appendChild(template.content.cloneNode(true));
     this.$button = this.$root.querySelector('button');
+    this._type = this.getAttribute('type') ?? 'default';
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -30,48 +31,53 @@ class Button extends HTMLElement {
     switch (name) {
       case 'disabled':
         this._disabled = getBooleanAttribute(newValue);
-        this.updateDisabled(this._disabled);
+        this.updateDisabled();
         break;
       case 'loading':
-        this.updateLoading(getBooleanAttribute(newValue))
+        this._loading = getBooleanAttribute(newValue);
+        this.updateLoading()
+        break;
+      case 'type':
+        this._type = newValue ?? 'default';
+        this.$button.classList.add(this._type);
         break;
     }
   }
 
-  updateDisabled(disabled) {
-    if (disabled) {
+  updateDisabled() {
+    if (this._disabled) {
       this.$button.setAttribute('disabled', ' ')
     } else {
       this.$button.removeAttribute('disabled')
     }
-    const loading = getBooleanAttribute(this.getAttribute('loading'));
-    loading && this.updateLoading(loading);
+    this._loading && this.updateLoading();
   }
 
-  updateLoading(loading) {
+  updateLoading() {
     const existedloading = this.$root.querySelector('be-loading');
-    if (loading && !existedloading) {
+    const style = stylesParams[this._type];
+    if (this._loading && !existedloading) {
       const newLoading= document.createElement('be-loading');
       newLoading.setAttribute('loading', 'true');
       newLoading.setAttribute('size', '14');
       newLoading.setAttribute('class', 'loading');
-      newLoading.setAttribute('color', this._disabled ? 'rgba(0, 0, 0, 0.25)' : '#fff');
+      newLoading.setAttribute('color', this._disabled ? style.disabledIconColor : style.iconColor);
       this.$button.appendChild(newLoading);
       this.$button.setAttribute('loading', ' ')
       return;
-    } else if (existedloading && !loading) {
+    } else if (existedloading && !this._loading) {
       existedloading.remove();
       this.$button.removeAttribute('loading')
       return;
-    } else if (loading) {
-      existedloading.setAttribute('color', this._disabled ? 'rgba(0, 0, 0, 0.25)' : '#fff');
+    } else if (this._loading) {
+      existedloading.setAttribute('color', this._disabled ? style.disabledIconColor : style.iconColor);
       this.$button.setAttribute('loading', ' ')
     }
   }
 
   connectedCallback() {
     this.$button.addEventListener("click", (e) => {
-      if (!this._disabled) {
+      if (!this._disabled && !this._loading) {
         this.dispatchEvent(new CustomEvent('be-click', e))
       }
     });

@@ -14,9 +14,9 @@ export default {
   },
 };
 
-const Template = ({ disabled, onClick, loading }) => {
+const Template = ({ disabled, onClick, loading, type }) => {
   return html`
-    <be-button disabled="${disabled}" @be-click=${onClick} loading="${loading}">hello</be-button>
+    <be-button disabled="${disabled}" @be-click=${onClick} loading="${loading}" type="${type}">hello</be-button>
   `;
 }
 
@@ -25,6 +25,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   disabled: false,
   loading: false,
+  type: 'primary',
 };
 
 export const Default = Template.bind({});
@@ -32,4 +33,5 @@ export const Default = Template.bind({});
 Default.args = {
   disabled: false,
   loading: false,
+  type: 'default',
 }

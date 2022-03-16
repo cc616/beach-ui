@@ -7,22 +7,34 @@ template.innerHTML = `
       text-align: center;
       position: relative;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-      color: #fff;
       display: inline-flex;
       align-items: center;
       border: none;
       font-size: 14px;
-      background-color: #1890ff;
       border: 1px solid transparent;
     }
 
     .btn:hover {
-      background-color: #40a9ff;
       cursor: pointer;
     }
 
-    .btn:active {
+    .primary {
+      background-color: #1890ff;
+      color: #fff;
+    }
+
+    .primary:active {
       background-color: #096dd9;
+    }
+
+    .primary:hover {
+      background-color: #40a9ff;
+    }
+
+    .default {
+      color: rgba(0, 0, 0, 0.85);
+      border-color: #d9d9d9;
+      background: none;
     }
 
     .btn .loading {
