@@ -1,27 +1,28 @@
 import { template } from './template';
 
-export interface ButtonProps {
-  type?: 'primary' | 'tertiary' | 'secondary' | 'text' | 'quaternary';
-  disabled?: boolean;
-  // loading?: boolean;
-  onClick?: (event: Event) => void;
-  icon?: Node;
-  // iconPosition?: 'left' | 'right';
-  // shape: 'default' | 'circle';
-  // size?: 'medium' | 'small';
-  // htmlType?: 'submit' | 'button' | 'reset';
-}
+// interface ButtonProps {
+//   type?: 'primary' | 'tertiary' | 'secondary' | 'text' | 'quaternary';
+//   disabled?: boolean;
+//   // loading?: boolean;
+//   icon?: Node;
+//   // iconPosition?: 'left' | 'right';
+//   // shape: 'default' | 'circle';
+//   // size?: 'medium' | 'small';
+//   // htmlType?: 'submit' | 'button' | 'reset';
+//   onClick: (event: Event) => void;
+// }
 
 class Button extends HTMLElement {
   private _disabled: boolean;
-  private element: ShadowRoot;
+  private $root: ShadowRoot;
+  private $button: HTMLElement;
   static get observedAttributes() { return ['disabled', 'loading', 'type']; }
 
   constructor() {
     super();
-    this.element = this.attachShadow({ mode: 'open' });
-    this.element.appendChild(template.content.cloneNode(true));
-    this._disabled = this.hasAttribute('disabled') && this.getAttribute('disabled') === 'true';
+    this.$root = this.attachShadow({ mode: 'open' });
+    this.$root.appendChild(template.content.cloneNode(true));
+    this.$button = this.$root.querySelector('button');
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -37,13 +38,20 @@ class Button extends HTMLElement {
     }
   }
 
-  updateDisabled () {
-    const buttonEle = this.element.querySelector('button');
+  updateDisabled() {
     if (this._disabled) {
-      buttonEle.setAttribute('disabled', ' ')
+      this.$button.setAttribute('disabled', ' ')
     } else {
-      buttonEle.removeAttribute('disabled')
+      this.$button.removeAttribute('disabled')
     }
+  }
+
+  connectedCallback() {
+    this.$button.addEventListener("click", (e) => {
+      if (!this._disabled) {
+        this.dispatchEvent(new CustomEvent('be-click', e))
+      }
+    });
   }
 
 }

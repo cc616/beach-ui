@@ -46,7 +46,14 @@
     "babel-loader": "^8.2.3",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-polyfill-corejs3": "^0.5.2",
-    "core-js": "^3.21.1"
+    "core-js": "^3.21.1",
+    "prettier": "^1.16.4",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^7.0.2"
   },
   "dependencies": {
     "lit-html": "^2.2.0"

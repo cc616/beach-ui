@@ -11,7 +11,14 @@ export default {
   },
 };
 
-export const Primary = ({ disabled, onClick }) =>
-  html`
-    <be-button disabled="${disabled}" onClick="${onClick}">hello</be-button>
+const Template = ({ disabled, onClick }) => {
+  return html`
+    <be-button disabled="${disabled}" @be-click=${onClick}>hello</be-button>
   `;
+}
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+  disabled: false,
+};

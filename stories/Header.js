@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 
 import './header.css';
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => html`
+export const Header = () => html`
   <header>
     <div class="wrapper">
       <div>

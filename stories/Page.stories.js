@@ -5,7 +5,7 @@ export default {
   title: 'Example/Page',
 };
 
-const Template = (args) => Page(args);
+const Template = () => Page();
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
