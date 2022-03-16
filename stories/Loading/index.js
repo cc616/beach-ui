@@ -1,4 +1,5 @@
 import { template } from '@/Loading/template';
+import { getBooleanAttribute } from '@/utils/getBooleanAttribute';
 
 // interface LoadingProps {
 //   size?: number;
@@ -7,10 +8,6 @@ import { template } from '@/Loading/template';
 // }
 
 class Loading extends HTMLElement {
-  private $root: ShadowRoot;
-  private $svg: SVGSVGElement;
-  private _style: HTMLElement;
-  private _loading: boolean;
   static get observedAttributes() { return ['loading', 'color', 'size']; }
 
   constructor() {
@@ -30,14 +27,14 @@ class Loading extends HTMLElement {
 
     switch (name) {
       case 'loading':
-        this._loading = newValue === 'true';
+        this._loading = getBooleanAttribute(newValue);
         this.updateLoading();
         break;
       case 'color':
-        this.updateStyles({ color: newValue });
+        this.updateStyles({ color: newValue, size: this.getAttribute('size') });
         break;
       case 'size':
-        this.updateStyles({ size: newValue });
+        this.updateStyles({ size: newValue, color: this.getAttribute('color') });
         break;
     }
   }
@@ -50,7 +47,7 @@ class Loading extends HTMLElement {
     }
   }
 
-  updateStyles({ color, size }: { color?: string; size?: string }) {
+  updateStyles({ color, size }) {
     this._style.textContent = `
       .wrapper {
         width: ${size ?? '24'}px;

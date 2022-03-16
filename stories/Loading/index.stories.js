@@ -17,8 +17,6 @@ export default {
 };
 
 const Template = ({ color, size, loading }) => {
-  console.log(size, 'size');
-  console.log(color, 'color');
   return html`
     <be-loading color="${color}" size="${size}" loading="${loading}"></be-loading>
   `;
