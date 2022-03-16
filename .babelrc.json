@@ -56,6 +56,17 @@
         "absoluteImports": "core-js",
         "version": "3.21.1"
       }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": [
+          "."
+        ],
+        "alias": {
+          "@": "./stories"
+        }
+      }
     ]
   ]
 }

@@ -1,4 +1,4 @@
-import { template } from './template';
+import { template } from '@/Button/template';
 
 // interface ButtonProps {
 //   type?: 'primary' | 'tertiary' | 'secondary' | 'text' | 'quaternary';

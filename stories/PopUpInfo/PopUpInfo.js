@@ -13,7 +13,7 @@ class PopUpInfo extends HTMLElement {
 
     const icon = document.createElement('span');
     icon.setAttribute('class', 'icon');
-    icon.setAttribute('tabindex', 0);
+    icon.setAttribute('tabindex', '0');
 
     const info = document.createElement('span');
     info.setAttribute('class', 'info');
