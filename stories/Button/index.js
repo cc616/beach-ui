@@ -1,7 +1,7 @@
 import { template } from '@/Button/template';
 import { getBooleanAttribute } from '@/utils/getBooleanAttribute';
 
-const stylesParams = {
+const typeStylesParams = {
   primary: {
     iconColor: '#fff',
     disabledIconColor: 'rgba(0, 0, 0, 0.25)',
@@ -12,15 +12,16 @@ const stylesParams = {
   }
 }
 
+const SIZE = ['large', 'medium', 'small'];
+
 class Button extends HTMLElement {
-  static get observedAttributes() { return ['disabled', 'loading', 'type']; }
+  static get observedAttributes() { return ['disabled', 'loading', 'type', 'size']; }
 
   constructor() {
     super();
     this.$root = this.attachShadow({ mode: 'open' });
     this.$root.appendChild(template.content.cloneNode(true));
     this.$button = this.$root.querySelector('button');
-    this._type = this.getAttribute('type') ?? 'default';
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -41,7 +42,19 @@ class Button extends HTMLElement {
         this._type = newValue ?? 'default';
         this.$button.classList.add(this._type);
         break;
+      case 'size':
+        this._size = SIZE.includes(newValue) ? newValue : 'medium';
+        this.updateSize();
     }
+  }
+  updateSize() {
+    SIZE.forEach((size) => {
+      if (size === this._size) {
+        this.$button.classList.add(size);
+      } else {
+        this.$button.classList.remove(size);
+      }
+    })
   }
 
   updateDisabled() {
@@ -55,7 +68,7 @@ class Button extends HTMLElement {
 
   updateLoading() {
     const existedloading = this.$root.querySelector('be-loading');
-    const style = stylesParams[this._type];
+    const style = this._type ? typeStylesParams[this._type] : {};
     if (this._loading && !existedloading) {
       const newLoading= document.createElement('be-loading');
       newLoading.setAttribute('loading', 'true');

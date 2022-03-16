@@ -12,6 +12,7 @@ template.innerHTML = `
       border: none;
       font-size: 14px;
       border: 1px solid transparent;
+      border-radius: 2px;
     }
 
     .btn:hover {
@@ -35,6 +36,21 @@ template.innerHTML = `
       color: rgba(0, 0, 0, 0.85);
       border-color: #d9d9d9;
       background: none;
+    }
+
+    .medium {
+      font-size: 14px;
+      padding: 4px 15px;
+    }
+
+    .large {
+      font-size: 16px;
+      padding: 6px 15px;
+    }
+
+    .small {
+      font-size: 14px;
+      padding: 0 7px;
     }
 
     .btn .loading {
