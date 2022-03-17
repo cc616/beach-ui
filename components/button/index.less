@@ -1,0 +1,137 @@
+@import '../styles/variables.less';
+
+@prefixCls: beach-btn;
+
+.@{prefixCls} {
+  user-select: none;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.5715;
+  border-radius: @border-radius;
+  border: 1px solid rgb(217, 217, 217);
+  transition: all @animation-duration @animation-type;
+  font-size: @font-size;
+  padding: 4px 12px;
+  height: 32px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[disabled] {
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  &-primary {
+    color: @white;
+    background-color: @primary;
+    border-color: @primary;
+
+    &:active {
+      border-color: @primary-active;
+      background-color: @primary-active;
+    }
+
+    &:hover {
+      border-color: @primary-hover;
+      background-color: @primary-hover;
+    }
+
+    &[disabled] {
+      background-color: @primary-disabled;
+      border-color: @primary-disabled;
+      color: rgba(255, 255, 255, .85);
+
+      &:hover,
+      &:active {
+        border-color: @primary-disabled;
+        background-color: @primary-disabled;
+      }
+    }
+  }
+
+  &-default,
+  &-ghost {
+    background-color: @white;
+    color: rgba(0, 0, 0, .85);
+
+    &:active {
+      border-color: @primary-active;
+      color: @primary-active;
+    }
+
+    &:hover {
+      border-color: @primary-hover;
+      color: @primary-hover;
+    }
+
+    &[disabled] {
+      color: rgba(0, 0, 0, .25);
+      background-color: #f5f5f5;
+      border-color: #d9d9d9;
+    }
+  }
+
+  &-ghost {
+    border-style: dashed;
+  }
+
+  &-text,
+  &-link {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+      color: @primary-hover;
+      border-color: transparent;
+    }
+  
+    &:active {
+      color: @primary-active;
+      border-color: transparent;
+    }
+
+    &[disabled] {
+      background: transparent;
+      border-color: transparent;
+
+      &:hover,
+      &:active {
+        border-color: transparent;
+        background: transparent;
+      }
+    }
+  }
+
+  &-text {
+    &[disabled] {
+      color: rgba(0, 0, 0, .25);
+    }
+  }
+
+  &-link {
+    color: @primary;
+
+    &[disabled] {
+      color: @primary-disabled;
+    }
+  }
+
+  &-lg {
+    font-size: @font-size-md;
+    padding: 6px 15px;
+    height: 40px;
+  }
+
+  &-sm {
+    font-size: @font-size;
+    padding: 0 7px;
+    height: 24px;
+  }
+}
+
+button {
+  border: none;
+}

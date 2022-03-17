@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "module": "ESNext",
+    "target": "ES5",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "lib": ["ES5", "ES2015", "ES2016", "ES2017", "DOM"],
+    "allowJs": true,
+    "checkJs": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "preserveConstEnums": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "types": ["node"],
+    "paths": {
+      "@/*": ["stories/*"],
+      "@/components": ["components/*"]
+    }
+  },
+  "include": ["stories/**/*", "components/**/*"],
+  "exclude": ["/node_modules/"]
+}
