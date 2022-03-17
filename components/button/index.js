@@ -1,5 +1,5 @@
-import { template } from '@/Button/template';
-import { getBooleanAttribute } from '@/utils/getBooleanAttribute';
+import { template } from './template';
+import { getBooleanAttribute } from '../utils/getBooleanAttribute';
 
 const typeStylesParams = {
   primary: {

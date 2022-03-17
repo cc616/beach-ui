@@ -1,8 +1,11 @@
+import styles from './index.css'
+
 // Create a class for the element
 class PopUpInfo extends HTMLElement {
   constructor() {
     // Always call super first in constructor
     super();
+    console.log(styles);
 
     // Create a shadow root
     const shadow = this.attachShadow({ mode: 'open' });
