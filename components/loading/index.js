@@ -52,7 +52,6 @@ class Loading extends HTMLElement {
       }
     `;
   }
-
 }
 
 if ('customElements' in window) {

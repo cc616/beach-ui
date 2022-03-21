@@ -17,7 +17,10 @@
       <be-button type="primary" disabled class="button">primary disabled</be-button>
       <be-button size="large" class="button">default large</be-button>
     </section>
-    <be-icon type="search"></be-icon>
+    <section>
+      <be-icon type="arrow-down" pointer class="icon"></be-icon>
+      <be-icon type="search" class="icon" disabled color="#1890ff" size="large"></be-icon>
+    </section>
   </body>
   <script>
     document.querySelectorAll('.button').forEach((ele) => {
@@ -25,5 +28,10 @@
         console.log('button clicked');
       })
     })
+    document.querySelectorAll('.icon').forEach((ele) => {
+        ele.addEventListener('be-click', () => {
+          console.log('icon clicked');
+        })
+      })
   </script>
 </html>
