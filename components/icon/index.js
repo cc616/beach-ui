@@ -1,17 +1,12 @@
-import { template } from './template';
-import { getBooleanAttribute } from '../utils/getBooleanAttribute';
+import { template } from './template.js';
 
 class Icon extends HTMLElement {
-  static get observedAttributes() { return [ 'color', 'size']; }
-
+  static get observedAttributes() { return [ 'type', 'color', 'size']; }
   constructor() {
     super();
-    this.$root = this.attachShadow({ mode: 'open' });
-    this.$root.appendChild(template.content.cloneNode(true));
-    this.$svg = this.$root.querySelector('svg');
-
-    this._style = document.createElement('style');
-    this.$root.appendChild(this._style);
+    const root = this.attachShadow({ mode: 'open' });
+    root.appendChild(template.content.cloneNode(true));
+    this.$ele = root.querySelector('span');
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -20,12 +15,9 @@ class Icon extends HTMLElement {
     }
 
     switch (name) {
-      case 'color':
-        this.updateStyles({ color: newValue, size: this.getAttribute('size') });
-        break;
-      case 'size':
-        this.updateStyles({ size: newValue, color: this.getAttribute('color') });
-        break;
+      case 'type':
+        this.$ele.classList.add(`icon-${newValue}`)
+      break;
     }
   }
 }
