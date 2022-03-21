@@ -12,7 +12,13 @@ const typeStylesParams = {
   }
 }
 
-const SIZE = ['large', 'medium', 'small'];
+const SIZE = ['small', 'medium', 'large'];
+
+const fontSizeMapping = {
+  small: 14,
+  medium: 14,
+  large: 16,
+};
 
 class Button extends HTMLElement {
   static get observedAttributes() { return ['disabled', 'loading', 'type', 'size']; }
@@ -22,6 +28,8 @@ class Button extends HTMLElement {
     this.$root = this.attachShadow({ mode: 'open' });
     this.$root.appendChild(template.content.cloneNode(true));
     this.$button = this.$root.querySelector('button');
+    this._style = document.createElement('style');
+    this.$root.appendChild(this._style);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -43,18 +51,11 @@ class Button extends HTMLElement {
         this.$button.classList.add(this._type);
         break;
       case 'size':
-        this._size = SIZE.includes(newValue) ? newValue : 'medium';
-        this.updateSize();
+        const _size = SIZE.includes(newValue) ? newValue : 'medium';
+        this.$button.setAttribute(_size, ' ');
+        this.updateStyles({ size: _size });
+        break;
     }
-  }
-  updateSize() {
-    SIZE.forEach((size) => {
-      if (size === this._size) {
-        this.$button.classList.add(size);
-      } else {
-        this.$button.classList.remove(size);
-      }
-    })
   }
 
   updateDisabled() {
@@ -66,6 +67,14 @@ class Button extends HTMLElement {
     this._loading && this.updateLoading();
   }
 
+  updateStyles({ size }) {
+    this._style.textContent = `
+      .btn {
+        font-size: ${fontSizeMapping[size]}px;
+      }
+    `;
+  }
+
   updateLoading() {
     const existedloading = this.$root.querySelector('be-loading');
     const style = this._type ? typeStylesParams[this._type] : {};
@@ -75,6 +84,7 @@ class Button extends HTMLElement {
       newLoading.setAttribute('size', '14');
       newLoading.setAttribute('class', 'loading');
       newLoading.setAttribute('color', this._disabled ? style.disabledIconColor : style.iconColor);
+      newLoading.setAttribute('name', 'icon');
       this.$button.appendChild(newLoading);
       this.$button.setAttribute('loading', ' ')
       return;

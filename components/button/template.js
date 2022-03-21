@@ -38,18 +38,15 @@ template.innerHTML = `
       background: none;
     }
 
-    .medium {
-      font-size: 14px;
+    .btn[medium] {
       padding: 4px 15px;
     }
 
-    .large {
-      font-size: 16px;
+    .btn[large] {
       padding: 6px 15px;
     }
 
-    .small {
-      font-size: 14px;
+    .btn[small] {
       padding: 0 7px;
     }
 
@@ -91,8 +88,12 @@ template.innerHTML = `
       cursor: not-allowed;
     }
 
+    slot[name="button-icon"]::slotted(be-icon) {
+      margin-right: 8px;
+    }
   </style>
   <button class="btn">
+    <slot name="button-icon"></slot>
     <span class="text"><slot></slot></span>
   </button>
 `

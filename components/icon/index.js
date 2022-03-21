@@ -8,7 +8,7 @@ const sizeMapping = {
 }
 
 class Icon extends HTMLElement {
-  static get observedAttributes() { return ['type', 'color', 'size', 'pointer', 'disabled']; }
+  static get observedAttributes() { return ['type', 'color', 'size', 'pointer', 'disabled', 'icon']; }
   constructor() {
     super();
     const root = this.attachShadow({ mode: 'open' });
@@ -39,6 +39,9 @@ class Icon extends HTMLElement {
       case 'disabled':
         this._disabled = getBooleanAttribute(newValue);
         this.updateDisabled();
+        break;
+      case 'icon':
+        newValue.setAttribute('class', 'icon')
         break;
     }
   }
