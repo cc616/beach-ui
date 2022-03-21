@@ -3,14 +3,13 @@ module.exports = {
     es6: true,
     node: true,
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'eslint-plugin-react'],
+  plugins: ['@typescript-eslint/eslint-plugin'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
   extends: [
-    'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
@@ -61,7 +60,7 @@ module.exports = {
         "selector": "memberLike",
         "modifiers": ["private"],
         "format": ["camelCase"],
-        "prefix": ["__"]
+        "prefix": ["_"]
       },
       {
         "selector": "memberLike",

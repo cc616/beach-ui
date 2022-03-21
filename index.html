@@ -10,5 +10,18 @@
   </head>
   <body>
     <popup-info img="http://cdn.taboola.com/libtrc/static/thumbnails/b4b4663f51ce85d3e37ad3e733cd1556.jpeg" data-text="hello world"></popup-info>
+    <section>
+      <be-button type="primary" class="button">primary medium</be-button>
+      <be-button type="primary" loading class="button">primary loading</be-button>
+      <be-button type="primary" disabled class="button">primary disabled</be-button>
+      <be-button size="large" class="button">default large</be-button>
+    </section>
   </body>
+  <script>
+    document.querySelectorAll('.button').forEach((ele) => {
+      ele.addEventListener('be-click', () => {
+        console.log('button clicked');
+      })
+    })
+  </script>
 </html>
