@@ -3,15 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-    <link href="/index.css" rel="stylesheet" type="text/css">
+    <link href="/index.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beach UI</title>
-    <link rel="stylesheet" href="./components/icon/iconfont.css">
+    <link rel="stylesheet" href="./components/icon/iconfont.css" />
     <script type="module" src="/src/index.js"></script>
   </head>
   <body>
-    <popup-info img="http://cdn.taboola.com/libtrc/static/thumbnails/b4b4663f51ce85d3e37ad3e733cd1556.jpeg" data-text="hello world"></popup-info>
     <section>
+      <h1>Pop-up</h1>
+      <popup-info
+        img="http://cdn.taboola.com/libtrc/static/thumbnails/b4b4663f51ce85d3e37ad3e733cd1556.jpeg"
+        data-text="hello world"
+      ></popup-info>
+    </section>
+    <section>
+      <h1>Buttons</h1>
       <be-button type="primary" class="button">primary medium</be-button>
       <be-button type="primary" loading class="button">primary loading</be-button>
       <be-button type="primary" disabled class="button">primary disabled</be-button>
@@ -22,20 +29,22 @@
       </be-button>
     </section>
     <section>
+      <h1>Search</h1>
       <be-icon type="arrow-down" pointer class="icon"></be-icon>
       <be-icon type="search" class="icon" disabled color="#1890ff" size="large"></be-icon>
     </section>
   </body>
   <script>
     document.querySelectorAll('.button').forEach((ele) => {
+      //封装在组件参数里？
       ele.addEventListener('be-click', () => {
         console.log('button clicked');
-      })
-    })
+      });
+    });
     document.querySelectorAll('.icon').forEach((ele) => {
-        ele.addEventListener('be-click', () => {
-          console.log('icon clicked');
-        })
-      })
+      ele.addEventListener('be-click', () => {
+        console.log('icon clicked');
+      });
+    });
   </script>
 </html>
