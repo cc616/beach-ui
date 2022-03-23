@@ -3,14 +3,10 @@
 @prefixCls: beach-checkBox;
 
 .@{prefixCls} {
-  user-select: none;
-  white-space: nowrap;
-  text-align: center;
-  line-height: 1.5715;
+  line-height: 10px;
   border-radius: @border-radius;
   border: 1px solid rgb(217, 217, 217);
   transition: all @animation-duration @animation-type;
-  font-size: @font-size;
   padding: 4px 12px;
   height: 32px;
 
@@ -22,8 +18,26 @@
     box-shadow: none;
     cursor: not-allowed;
   }
+
+  &-lg {
+    width: 45px;
+    height: 45px;
+  }
+
+  &-sm {
+    width: 10px;
+    height: 10px;
+  }
+
+  &-red {
+    background-color: @primary;
+    transition: all @animation-duration @animation-type;
+    height: inherit;
+    width: inherit;
+  }
 }
 
-button {
+input{
   border: none;
 }
+
