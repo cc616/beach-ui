@@ -1,29 +1,7 @@
 export const template = document.createElement('template');
 
 template.innerHTML = `
-  <style>
-    .wrapper {
-      width: 24px;
-      height: 24px;
-    }
-    .wrapper[loading] {
-      animation: loading-animation 1.5s linear infinite;
-    }
-
-    @keyframes loading-animation {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .icon {
-      fill: '#000';
-    }
-
-  </style>
+  <link rel="stylesheet" href=${new URL('index.css', import.meta.url).href}>
   <svg
     class="wrapper"
     xmlns="http://www.w3.org/2000/svg"

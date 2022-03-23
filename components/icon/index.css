@@ -1,0 +1,6 @@
+.icon-pointer {
+  cursor: pointer;
+}
+.icon-disabled {
+  cursor: not-allowed;
+}

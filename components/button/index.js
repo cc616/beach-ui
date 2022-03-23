@@ -119,7 +119,6 @@ class Button extends HTMLElement {
       }
     });
   }
-
 }
 
 if ('customElements' in window) {

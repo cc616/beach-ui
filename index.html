@@ -33,10 +33,19 @@
       <be-icon type="arrow-down" pointer class="icon"></be-icon>
       <be-icon type="search" class="icon" disabled color="#1890ff" size="large"></be-icon>
     </section>
+    <section>
+      <h1>Modal</h1>
+      <be-button class="modalButton" type="primary">click me</be-button>
+      <be-modal>
+        <p slot="header">header</p>
+        <p slot="body">body</p>
+        <be-button class="modalFooter" type="primary" slot="footer">ok</be-button>
+      </be-modal>
+    </section>
   </body>
   <script>
     document.querySelectorAll('.button').forEach((ele) => {
-      //封装在组件参数里？
+      //封装在组件参数里？ok～
       ele.addEventListener('be-click', () => {
         console.log('button clicked');
       });
@@ -45,6 +54,12 @@
       ele.addEventListener('be-click', () => {
         console.log('icon clicked');
       });
+    });
+    document.querySelector('.modalButton').addEventListener('be-click', () => {
+      document.querySelector('be-modal').setAttribute('visible', true);
+    });
+    document.querySelector('.modalFooter').addEventListener('be-click', () => {
+      document.querySelector('be-modal').setAttribute('visible', false);
     });
   </script>
 </html>
