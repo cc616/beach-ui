@@ -1,0 +1,40 @@
+@import '../styles/variables.less';
+
+@prefixCls: beach-input;
+
+.@{prefixCls} {
+  line-height: 10px;
+  border: 1px solid darkgrey;
+  transition: all @animation-duration @animation-type;
+  padding: 4px 12px;
+  height: 32px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[disabled] {
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  &-underline {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 2px solid darkgrey;
+  }
+
+  &-bold{
+    border: 4px solid darkgrey;
+
+    &:focus {
+      border: 2px solid @primary-active !important;
+    }
+  }
+}
+
+input{
+  border: none;
+}
+
