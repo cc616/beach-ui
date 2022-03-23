@@ -12,6 +12,13 @@ export default {
       control: 'select',
       options: [ "default","underline", "bold"],
     },
+    content: {
+      name: 'content',
+      defaultValue: 'number',
+      description: 'content',
+      control: 'select',
+      options: [ "number","string"],
+    },
     maxLength: {
       name: 'maxLength',
       defaultValue: 'default',
