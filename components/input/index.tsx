@@ -9,9 +9,10 @@ export interface InputProps {
   maxLength: number;
   type: 'default' | 'underline' | 'bold';
   disabled: boolean;
+  placeHolder: string;
 }
 
-const Input : FC<InputProps> = ({disabled, maxLength = 256, type='default'}: InputProps) => {
+const Input : FC<InputProps> = ({disabled, maxLength = 256, type='default', placeHolder=`max length is ${maxLength}`}: InputProps) => {
   const handleChange = (e) => {
     if(e.target.value.length > maxLength) {
       alert('exceed max length!');
@@ -20,7 +21,7 @@ const Input : FC<InputProps> = ({disabled, maxLength = 256, type='default'}: Inp
     return e.target.value;
   };
 
-  return(<input type='text' disabled={disabled} onChange={handleChange} className={cls(prefixCls, `${prefixCls}-${type}`)}/>)
+  return(<input type='text' disabled={disabled} onChange={handleChange} placeholder={placeHolder} className={cls(prefixCls, `${prefixCls}-${type}`)}/>)
 }
 
 export default Input;
