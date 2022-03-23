@@ -30,6 +30,8 @@ class Button extends HTMLElement {
     this.$button = this.$root.querySelector('button');
     this._style = document.createElement('style');
     this.$root.appendChild(this._style);
+
+    this.initIcon();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -73,6 +75,22 @@ class Button extends HTMLElement {
         font-size: ${fontSizeMapping[size]}px;
       }
     `;
+  }
+
+  initIcon() {
+    const slot = this.$root.querySelector('slot[name="button-icon"]');
+    slot.addEventListener('slotchange', () => {
+      const nodes = slot.assignedNodes();
+      const iconStyle = document.createElement('style');
+      const buttonSize = this.getAttribute('size');
+      const _size = SIZE.includes(buttonSize) ? buttonSize : 'medium';
+      iconStyle.textContent = `
+        .icon {
+          font-size: ${fontSizeMapping[_size]}px;
+        }
+      `;
+      nodes[0].shadowRoot.appendChild(iconStyle);
+    });
   }
 
   updateLoading() {

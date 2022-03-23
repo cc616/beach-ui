@@ -63,9 +63,10 @@ class Icon extends HTMLElement {
   }
 
   updateStyles({ color, size }) {
+    console.log('size', size);
     this._style.textContent = `
       .icon {
-        font-size: ${sizeMapping[size ?? 'default']}px;
+        font-size: ${isNaN(Number(size)) ? sizeMapping[size ?? 'default'] : size}px;
         color: ${color ?? '#000'};
       }
     `;
