@@ -1,0 +1,29 @@
+@import '../styles/variables.less';
+
+@prefixCls: beach-checkBox;
+
+.@{prefixCls} {
+  user-select: none;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.5715;
+  border-radius: @border-radius;
+  border: 1px solid rgb(217, 217, 217);
+  transition: all @animation-duration @animation-type;
+  font-size: @font-size;
+  padding: 4px 12px;
+  height: 32px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[disabled] {
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+button {
+  border: none;
+}
