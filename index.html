@@ -19,47 +19,43 @@
     </section>
     <section>
       <h1>Buttons</h1>
-      <be-button type="primary" class="button">primary medium</be-button>
-      <be-button type="primary" loading class="button">primary loading</be-button>
-      <be-button type="primary" disabled class="button">primary disabled</be-button>
-      <be-button size="large" class="button">default large</be-button>
-      <be-button type="primary">
+      <be-button type="primary" class="button" onclick="handleButtonClick(event)">primary medium</be-button>
+      <be-button type="primary" loading class="button" onclick="handleButtonClick(event)">primary loading</be-button>
+      <be-button type="primary" disabled class="button" onclick="handleButtonClick(event)">primary disabled</be-button>
+      <be-button size="large" class="button" onclick="handleButtonClick(event)">default large</be-button>
+      <be-button type="primary" onclick="handleButtonClick(event)">
         <be-icon type="search" slot="button-icon"></be-icon>
         button with icon
       </be-button>
     </section>
     <section>
       <h1>Icons</h1>
-      <be-icon type="arrow-down" pointer class="icon"></be-icon>
-      <be-icon type="search" class="icon" disabled color="#1890ff" size="large"></be-icon>
+      <be-icon type="arrow-down" pointer class="icon" onclick="handleIcon(event)"></be-icon>
+      <be-icon type="search" class="icon" disabled color="#1890ff" size="large" onclick="handleIcon(event)"></be-icon>
     </section>
     <section>
       <h1>Modal</h1>
-      <be-button class="modalButton" type="primary">click me</be-button>
+      <be-button class="modalButton" type="primary" onclick="handleOpenModal()">click me</be-button>
       <be-modal>
         <p slot="header">header</p>
         <p slot="body">body</p>
-        <be-button class="modalFooter" type="primary" slot="footer">ok</be-button>
+        <be-button class="modalFooter" type="primary" slot="footer" onclick="handleCloseModal()">ok</be-button>
       </be-modal>
     </section>
   </body>
   <script>
-    document.querySelectorAll('.button').forEach((ele) => {
-      //封装在组件参数里？ok～
-      ele.addEventListener('be-click', () => {
-        console.log('button clicked');
-      });
-    });
-    document.querySelectorAll('.icon').forEach((ele) => {
-      ele.addEventListener('be-click', () => {
-        console.log('icon clicked');
-      });
-    });
-    document.querySelector('.modalButton').addEventListener('be-click', () => {
+    const handleButtonClick = (e) => {
+      console.log('button clicked');
+    }
+    const handleIcon = (e) => {
+      console.log('icon clicked');
+    }
+    const handleOpenModal = () => {
       document.querySelector('be-modal').setAttribute('visible', true);
-    });
-    document.querySelector('.modalFooter').addEventListener('be-click', () => {
+    }
+
+    const handleCloseModal = () => {
       document.querySelector('be-modal').setAttribute('visible', false);
-    });
+    }
   </script>
 </html>

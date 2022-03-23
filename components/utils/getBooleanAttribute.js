@@ -1,0 +1,1 @@
+export const getBooleanAttribute = (value) => value === 'true' || value === '';

@@ -1,6 +1,7 @@
 import { template } from './template';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
 import { getUpdateMethodsName } from '../utils/updateAttribute';
+import { initEvents } from '../utils/initEvents';
 
 const typeStylesParams = {
   primary: {
@@ -113,9 +114,10 @@ class Button extends HTMLElement {
   }
 
   connectedCallback() {
-    this.$button.addEventListener("click", (e) => {
+    initEvents(this, this.$root);
+    this.$root.addEventListener("be-click", (e) => {
       if (!this._disabled && !this._loading) {
-        this.dispatchEvent(new CustomEvent('be-click', e))
+        this.onclick({ ...e });
       }
     });
   }

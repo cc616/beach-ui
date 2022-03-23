@@ -1,6 +1,7 @@
 import { template } from './template.js';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
 import { getUpdateMethodsName } from '../utils/updateAttribute';
+import { initEvents } from '../utils/initEvents';
 
 const sizeMapping = {
   small: 12,
@@ -12,11 +13,11 @@ class Icon extends HTMLElement {
   static get observedAttributes() { return ['type', 'color', 'size', 'pointer', 'disabled']; }
   constructor() {
     super();
-    const root = this.attachShadow({ mode: 'open' });
-    root.appendChild(template.content.cloneNode(true));
-    this.$icon = root.querySelector('span');
+    this.$root = this.attachShadow({ mode: 'open' });
+    this.$root.appendChild(template.content.cloneNode(true));
+    this.$icon = this.$root.querySelector('span');
     this._style = document.createElement('style');
-    root.appendChild(this._style);
+    this.$root.appendChild(this._style);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -53,9 +54,10 @@ class Icon extends HTMLElement {
   }
 
   connectedCallback() {
-    this.$icon.addEventListener("click", (e) => {
+    initEvents(this, this.$root);
+    this.$root.addEventListener("be-click", (e) => {
       if (!this._disabled) {
-        this.dispatchEvent(new CustomEvent('be-click', e));
+        this.onclick({ ...e });
       }
     });
   }
