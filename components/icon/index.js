@@ -1,5 +1,6 @@
 import { template } from './template.js';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
+import { getUpdateMethodsName } from '../utils/updateAttribute';
 
 const sizeMapping = {
   small: 12,
@@ -8,7 +9,7 @@ const sizeMapping = {
 }
 
 class Icon extends HTMLElement {
-  static get observedAttributes() { return ['type', 'color', 'size', 'pointer', 'disabled', 'icon']; }
+  static get observedAttributes() { return ['type', 'color', 'size', 'pointer', 'disabled']; }
   constructor() {
     super();
     const root = this.attachShadow({ mode: 'open' });
@@ -23,30 +24,27 @@ class Icon extends HTMLElement {
       return;
     }
 
-    switch (name) {
-      case 'color':
-        this.updateStyles({ color: newValue, size: this.getAttribute('size') });
-        break;
-      case 'size':
-        this.updateStyles({ size: newValue, color: this.getAttribute('color') });
-        break;
-      case 'type':
-        this.$icon.classList.add(`icon-${newValue}`);
-        break;
-      case 'pointer':
-        this.$icon.classList.add('icon-pointer');
-        break;
-      case 'disabled':
-        this._disabled = getBooleanAttribute(newValue);
-        this.updateDisabled();
-        break;
-      case 'icon':
-        newValue.setAttribute('class', 'icon')
-        break;
-    }
+    this[getUpdateMethodsName(name)](newValue);
   }
 
-  updateDisabled() {
+  updateColor(newValue) {
+    this.updateStyles({ color: newValue, size: this.getAttribute('size') });
+  }
+
+  updateSize(newValue) {
+    this.updateStyles({ size: newValue, color: this.getAttribute('color') });
+  }
+
+  updateType(newValue) {
+    this.$icon.classList.add(`icon-${newValue}`);
+  }
+
+  updatePointer() {
+    this.$icon.classList.add('icon-pointer');
+  }
+
+  updateDisabled(newValue) {
+    this._disabled = getBooleanAttribute(newValue);
     if (this._disabled) {
       this.$icon.classList.add('icon-disabled');
     } else {
@@ -63,7 +61,6 @@ class Icon extends HTMLElement {
   }
 
   updateStyles({ color, size }) {
-    console.log('size', size);
     this._style.textContent = `
       .icon {
         font-size: ${isNaN(Number(size)) ? sizeMapping[size ?? 'default'] : size}px;

@@ -1,5 +1,6 @@
 import { template } from './template';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
+import { getUpdateMethodsName } from '../utils/updateAttribute';
 
 class Loading extends HTMLElement {
   static get observedAttributes() { return ['loading', 'color', 'size']; }
@@ -19,21 +20,19 @@ class Loading extends HTMLElement {
       return;
     }
 
-    switch (name) {
-      case 'loading':
-        this._loading = getBooleanAttribute(newValue);
-        this.updateLoading();
-        break;
-      case 'color':
-        this.updateStyles({ color: newValue, size: this.getAttribute('size') });
-        break;
-      case 'size':
-        this.updateStyles({ size: newValue, color: this.getAttribute('color') });
-        break;
-    }
+    this[getUpdateMethodsName(name)](newValue);
   }
 
-  updateLoading() {
+  updateColor(newValue) {
+    this.updateStyles({ color: newValue, size: this.getAttribute('size') });
+  }
+
+  updateSize(newValue) {
+    this.updateStyles({ size: newValue, color: this.getAttribute('color') });
+  }
+
+  updateLoading(newValue) {
+    this._loading = getBooleanAttribute(newValue);
     if (this._loading) {
       this.$svg.setAttribute('loading', ' ')
     } else {

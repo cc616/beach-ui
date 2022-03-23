@@ -1,5 +1,6 @@
 import { template } from './template';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
+import { getUpdateMethodsName } from '../utils/updateAttribute';
 
 const typeStylesParams = {
   primary: {
@@ -39,28 +40,22 @@ class Button extends HTMLElement {
       return;
     }
 
-    switch (name) {
-      case 'disabled':
-        this._disabled = getBooleanAttribute(newValue);
-        this.updateDisabled();
-        break;
-      case 'loading':
-        this._loading = getBooleanAttribute(newValue);
-        this.updateLoading()
-        break;
-      case 'type':
-        this._type = newValue ?? 'default';
-        this.$button.classList.add(this._type);
-        break;
-      case 'size':
-        const _size = SIZE.includes(newValue) ? newValue : 'medium';
-        this.$button.setAttribute(_size, ' ');
-        this.updateStyles({ size: _size });
-        break;
-    }
+    this[getUpdateMethodsName(name)](newValue);
   }
 
-  updateDisabled() {
+  updateType(newValue) {
+    this._type = newValue ?? 'default';
+    this.$button.classList.add(this._type);
+  }
+
+  updateSize(newValue) {
+    const _size = SIZE.includes(newValue) ? newValue : 'medium';
+    this.$button.setAttribute(_size, ' ');
+    this.updateStyles({ size: _size });
+  }
+
+  updateDisabled(newValue) {
+    this._disabled = getBooleanAttribute(newValue);
     if (this._disabled) {
       this.$button.setAttribute('disabled', ' ')
     } else {
@@ -93,7 +88,8 @@ class Button extends HTMLElement {
     });
   }
 
-  updateLoading() {
+  updateLoading(newValue) {
+    this._loading = getBooleanAttribute(newValue);
     const existedloading = this.$root.querySelector('be-loading');
     const style = this._type ? typeStylesParams[this._type] : {};
     if (this._loading && !existedloading) {
