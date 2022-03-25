@@ -2,10 +2,9 @@ import { template } from './template';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
 import { getUpdateMethodsName } from '../utils/updateAttribute';
 
-// 'spinning'
-class Modal extends HTMLElement {
+export class Modal extends HTMLElement {
   static get observedAttributes() { 
-    return ['okText', 'visible', 'title', 'cancelText', 'closable', 'confirmLoading', 'okDisabled', 'cancelDisabled', 'type', 'okButtonType'];
+    return ['visible', 'title', 'closable', 'confirmLoading', 'okDisabled', 'type'];
   }
 
   constructor() {
@@ -13,6 +12,13 @@ class Modal extends HTMLElement {
     this.$root = this.attachShadow({ mode: 'open' });
     this.$root.appendChild(template.content.cloneNode(true));
     this.$portal = this.$root.querySelector('be-portal');
+    const closable = this.getAttribute('closable') !== 'false';
+    this.updateClosable(closable);
+    this.initDefaultFooter();
+  }
+
+  static confirm({ title, content, okText, cancelText }) {
+    this.$portal.setAttribute('visible', true);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -29,6 +35,14 @@ class Modal extends HTMLElement {
     this.updateShow(visible);
   }
 
+  updateTitle(newValue) {
+    if (newValue) {
+      const titleEle = document.createElement('div');
+      titleEle.innerHTML = newValue;
+      this.$root.querySelector('slot[name="header"]').append(titleEle);
+    }
+  }
+
   updateShow(visible) {
     if (visible) {
       ['.mask', '.modal', '.modalWrapper'].forEach((className) => {
@@ -40,6 +54,31 @@ class Modal extends HTMLElement {
         this.$root.querySelector(className).classList.remove('show');
         this.$root.querySelector(className).classList.add('hide');
       })
+    }
+  }
+
+  updateClosable(closable) {
+    const that = this;
+    if (!closable) {
+      this.$root.querySelector('.close').remove();
+    } else {
+      this.$root.querySelector('.close').onclick = function() {
+        that.setAttribute('visible', false);
+      };
+    }
+  }
+
+  initDefaultFooter() {
+    const that = this;
+    const cancelBtn = this.$root.querySelector('.defaultFooter be-button[type="default"]');
+    const okBtn = this.$root.querySelector('.defaultFooter be-button[type="primary"]');
+
+    okBtn.onclick = function() {
+      that.setAttribute('visible', false);
+    }
+
+    cancelBtn.onclick = function() {
+      that.setAttribute('visible', false);
     }
   }
 }

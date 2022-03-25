@@ -1,7 +1,6 @@
 import { template } from './template';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
 import { getUpdateMethodsName } from '../utils/updateAttribute';
-import { initEvents } from '../utils/initEvents';
 
 const typeStylesParams = {
   primary: {
@@ -62,7 +61,6 @@ class Button extends HTMLElement {
     } else {
       this.$button.removeAttribute('disabled')
     }
-    this._loading && this.updateLoading();
   }
 
   updateStyles({ size }) {
@@ -114,8 +112,8 @@ class Button extends HTMLElement {
   }
 
   connectedCallback() {
-    initEvents(this, this.$root);
-    this.$root.addEventListener("be-click", (e) => {
+    this.$root.addEventListener("click", (e) => {
+      e.stopPropagation();
       if (!this._disabled && !this._loading) {
         this.onclick({ ...e });
       }

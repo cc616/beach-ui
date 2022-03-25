@@ -11,12 +11,18 @@ template.innerHTML = `
             <div class="title">
               <slot name="header"></slot>
             </div>
+            <be-icon type="close" class="close" color="#00000073" pointer></be-icon>
           </div>
           <div class="body">
             <slot name="body"></slot>
           </div>
           <div class="footer">
-            <slot name="footer"><slot>
+            <slot name="footer">
+              <div class="defaultFooter">
+                <be-button type="default">CANCEL</be-button>
+                <be-button type="primary">OK</be-button>
+              </div>
+            <slot>
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@
 }
 
 .modal {
-  width: 752px;
+  width: 520px;
   border-radius: 4px;
   background-color: #fff;
   transform: scale(0);
@@ -85,13 +85,14 @@
 .header {
   height: 64px;
   display: flex;
+  justify-content: space-between;
   padding: 20px 24px;
   border-bottom: 1px solid rgba(102, 102, 102, 0.4);
   align-items: center;
+  box-sizing: border-box;
 }
 
 .header .title {
-  flex: 1;
   font-size: 18px;
   line-height: 24px;
 }

@@ -1,7 +1,6 @@
 import { template } from './template.js';
 import { getBooleanAttribute } from '../utils/getBooleanAttribute';
 import { getUpdateMethodsName } from '../utils/updateAttribute';
-import { initEvents } from '../utils/initEvents';
 
 const sizeMapping = {
   small: 12,
@@ -54,9 +53,9 @@ class Icon extends HTMLElement {
   }
 
   connectedCallback() {
-    initEvents(this, this.$root);
-    this.$root.addEventListener("be-click", (e) => {
-      if (!this._disabled) {
+    this.$root.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!this._disabled && !!this.onclick) {
         this.onclick({ ...e });
       }
     });
