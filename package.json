@@ -10,7 +10,9 @@
     "build:css": "cd build && gulp",
     "build:common": "cd build && rollup --config rollup.config.common.js",
     "build:umd": "cd build && rollup --config rollup.config.js",
-    "build": "yarn clean && yarn build:common && yarn build:umd && yarn build:css"
+    "build": "yarn clean && yarn build:common && yarn build:umd && yarn build:css",
+    "stylelint:fix": "stylelint 'components/**/*.less' --custom-syntax postcss-less --fix",
+    "eslint:fix": "eslint ./components --fix"
   },
   "files": [
     "dist",
@@ -25,7 +27,7 @@
       "git add"
     ],
     "components/**/*.less": [
-      "stylelint --syntax less --fix",
+      "stylelint --custom-syntax postcss-less --fix",
       "git add"
     ]
   },
@@ -90,6 +92,7 @@
     "less": "3.9.0",
     "less-loader": "5.0.0",
     "postcss": "^8.4.12",
+    "postcss-less": "^6.0.0",
     "prettier": "2.6.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -100,6 +103,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "style-loader": "2.0.0",
     "stylelint": "^14.6.1",
+    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
     "typescript": "4.6.2"
   }
