@@ -1,18 +1,16 @@
-import { FC, ReactNode } from 'react';
+import React from 'react';
 import cls from 'classnames';
 
-import './index.less';
+import { ButtonProps } from './index.d';
 
 const prefixCls = 'beach-btn';
 
-export interface ButtonProps {
-  type: 'primary' | 'default' | 'ghost' | 'link' | 'text';
-  size: 'lg' | 'default' | 'sm';
-  children: ReactNode;
-  disabled?: boolean;
-}
-
-const Button: FC<ButtonProps> = ({ children, type = 'default', size, disabled = false }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  type = 'default',
+  size = 'default',
+  disabled = false,
+}: ButtonProps) => {
   return (
     <button
       disabled={disabled}

@@ -1,6 +1,8 @@
 import { Story, Meta } from '@storybook/react';
 
-import Button, { ButtonProps } from '../components/button'
+import Button from '../components/button';
+import { ButtonProps } from '../components/button/index.d';
+import '../components/button/index.less';
 
 export default {
   title: 'Example/Button',
@@ -11,13 +13,13 @@ export default {
       defaultValue: 'default',
       description: '按钮类型',
       control: 'select',
-      options: ["primary", "default", "ghost", "link", "text"]
+      options: ['primary', 'default', 'ghost', 'link', 'text'],
     },
     size: {
       defaultValue: 'default',
       description: '按钮大小',
       control: 'select',
-      options: ["sm", "default", "lg"]
+      options: ['sm', 'default', 'lg'],
     },
     disabled: {
       description: '按钮禁止',
@@ -27,27 +29,27 @@ export default {
   },
 } as Meta;
 
-const ButtonTextMap: {[key: string]: string} = {
+const ButtonTextMap: { [key: string]: string } = {
   primary: 'Primary',
   default: 'Default',
   ghost: 'Ghost',
   link: 'Link',
   text: 'Text',
-}
+};
 
 const BasicTemplate: Story<ButtonProps> = (args) => {
-  const { type = 'default' } = args
+  const { type = 'default' } = args;
   return (
     <>
       <h4>按钮类型：{type}</h4>
       <Button {...args}>{ButtonTextMap[type]} Button</Button>
     </>
-  )
+  );
 };
 
 export const Basic = BasicTemplate.bind({});
 Basic.args = {
   disabled: false,
   type: 'primary',
-  size: 'default'
+  size: 'default',
 };
