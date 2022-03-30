@@ -18,6 +18,45 @@
     "lib",
     "LICENSE"
   ],
+  "lint-staged": {
+    "*.ts?(x)": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "components/**/*.less": [
+      "stylelint --syntax less --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+    "beach",
+    "beach-ui",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "web",
+    "framework",
+    "frontend"
+  ],
+  "tags": [
+    "beach",
+    "beach-ui",
+    "react",
+    "react-ui",
+    "component",
+    "components",
+    "javascript",
+    "es6",
+    "css3"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.8",
@@ -60,6 +99,8 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "style-loader": "2.0.0",
+    "stylelint": "^14.6.1",
+    "stylelint-config-standard": "^25.0.0",
     "typescript": "4.6.2"
   }
 }

@@ -1,5 +1,8 @@
-import {Meta, Story} from "@storybook/react";
-import CheckBox, {CheckBoxProps} from "../components/checkbox";
+import { Meta, Story } from '@storybook/react';
+import CheckBox from '../components/checkbox';
+import { CheckBoxProps } from '../components/checkbox/index.d';
+
+import '../components/index.less';
 
 export default {
   title: 'Example/CheckBox',
@@ -10,14 +13,14 @@ export default {
       defaultValue: 'default',
       description: 'type',
       control: 'select',
-      options: [ "default","round"],
+      options: ['default', 'round'],
     },
     color: {
       name: 'color',
       defaultValue: 'default',
       description: 'color',
       control: 'select',
-      options: [ "default","red"],
+      options: ['default', 'red'],
     },
     disabled: {
       description: 'unchecked',
@@ -25,11 +28,11 @@ export default {
       control: { type: 'boolean' },
     },
     size: {
-      description:' size',
+      description: ' size',
       defaultValue: 'default',
       control: 'select',
-      options: [ "default","sm", "lg"],
-    }
+      options: ['default', 'sm', 'lg'],
+    },
   },
 } as Meta;
 
@@ -38,7 +41,7 @@ const BasicTemplate: Story<CheckBoxProps> = (args) => {
     <>
       <CheckBox {...args}>CheckBox</CheckBox>
     </>
-  )
+  );
 };
 
 export const Basic = BasicTemplate.bind({});

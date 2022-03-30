@@ -19,7 +19,7 @@ const BasicTemplate: Story = () => {
   return (
     <>
       <h4>基础用法</h4>
-      <Modal />
+      <Modal visible />
     </>
   );
 };

@@ -1,5 +1,8 @@
-import Input, {InputProps} from "../components/input";
-import {Meta, Story} from "@storybook/react";
+import { Meta, Story } from '@storybook/react';
+import Input from '../components/input';
+import { InputProps } from '../components/input/index.d';
+
+import '../components/input/index.less';
 
 export default {
   title: 'Example/Input',
@@ -10,21 +13,21 @@ export default {
       defaultValue: 'default',
       description: 'type',
       control: 'select',
-      options: [ "default","underline", "bold"],
+      options: ['default', 'underline', 'bold'],
     },
     content: {
       name: 'content',
       defaultValue: 'number',
       description: 'content',
       control: 'select',
-      options: [ "number","string"],
+      options: ['number', 'string'],
     },
     maxLength: {
       name: 'maxLength',
       defaultValue: 'default',
       description: 'color',
       control: 'select',
-      options: [5,20,100,200,256],
+      options: [5, 20, 100, 200, 256],
     },
     disabled: {
       description: 'disabled',
@@ -34,13 +37,9 @@ export default {
   },
 } as Meta;
 
-const BasicTemplate : Story<InputProps> = (args) => {
-  return (
-    <>
-      <Input {...args}>CheckBox</Input>
-    </>
-  )
-}
+const BasicTemplate: Story<InputProps> = (args) => {
+  return <Input {...args}>CheckBox</Input>;
+};
 
 export const Basic = BasicTemplate.bind({});
 Basic.args = {
@@ -48,4 +47,3 @@ Basic.args = {
   type: 'default',
   maxLength: 20,
 };
-
