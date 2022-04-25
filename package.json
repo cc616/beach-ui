@@ -12,7 +12,8 @@
     "build:umd": "cd build && rollup --config rollup.config.js",
     "build": "yarn clean && yarn build:common && yarn build:umd && yarn build:css",
     "stylelint:fix": "stylelint 'components/**/*.less' --custom-syntax postcss-less --fix",
-    "eslint:fix": "eslint ./components --fix"
+    "eslint:fix": "eslint ./components --fix",
+    "prepare": "husky install"
   },
   "files": [
     "dist",
@@ -21,20 +22,12 @@
     "LICENSE"
   ],
   "lint-staged": {
-    "*.ts?(x)": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
+    "*.{ts,tsx}": [
+      "prettier --write"
     ],
-    "components/**/*.less": [
-      "stylelint --custom-syntax postcss-less --fix",
-      "git add"
+    "*.less": [
+      "stylelint --custom-syntax postcss-less --fix"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "keywords": [
     "beach",
@@ -86,11 +79,11 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.29.4",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
     "gulp-cssnano": "^2.1.3",
-    "gulp-less": "^5.0.0",
+    "husky": "^7.0.4",
     "less": "3.9.0",
     "less-loader": "5.0.0",
+    "lint-staged": "^12.4.0",
     "postcss": "^8.4.12",
     "postcss-less": "^6.0.0",
     "prettier": "2.6.0",
@@ -103,7 +96,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "style-loader": "2.0.0",
     "stylelint": "^14.6.1",
-    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
     "typescript": "4.6.2"
   }
